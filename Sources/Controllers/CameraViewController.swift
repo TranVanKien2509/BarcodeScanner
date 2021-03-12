@@ -72,7 +72,11 @@ public final class CameraViewController: UIViewController {
   }
 
   private var frontCameraDevice: AVCaptureDevice? {
-    AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .front)
+    if #available(iOS 10.0, *) {
+        AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .front)
+    } else {
+        // Fallback on earlier versions
+    }
   }
 
   private var backCameraDevice: AVCaptureDevice? {
@@ -423,7 +427,7 @@ private extension CameraViewController {
 
   func makeCameraButton() -> UIButton {
     let button = UIButton(type: .custom)
-    button.setImage(imageNamed("cameraRotate"), for: UIControl.State())
+//    button.setImage(imageNamed("cameraRotate"), for: UIControl.State())
     button.isHidden = !showsCameraButton
     return button
   }
