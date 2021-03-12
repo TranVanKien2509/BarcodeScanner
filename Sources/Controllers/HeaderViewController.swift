@@ -18,6 +18,8 @@ public final class HeaderViewController: UIViewController {
   public private(set) lazy var titleLabel: UILabel = self.makeTitleLabel()
   /// Left bar button item of the navigation bar.
   public private(set) lazy var closeButton: UIButton = self.makeCloseButton()
+    
+  public private(set) lazy var doneButtonClick: UIButton = self.makeDoneButton()
 
   // MARK: - View lifecycle
 
@@ -26,7 +28,7 @@ public final class HeaderViewController: UIViewController {
 
     navigationBar.delegate = self
     closeButton.addTarget(self, action: #selector(handleCloseButtonTap), for: .touchUpInside)
-
+    doneButtonClick.addTarget(self, action: #selector(handleCloseButtonTap), for: .touchUpInside)
     view.addSubview(navigationBar)
     setupConstraints()
   }
@@ -68,6 +70,7 @@ private extension HeaderViewController {
     let navigationItem = UINavigationItem()
     closeButton.sizeToFit()
     navigationItem.leftBarButtonItem = UIBarButtonItem(customView: closeButton)
+    navigationItem.rightBarButtonItem = UIBarButtonItem(customView: doneButtonClick)
     titleLabel.sizeToFit()
     navigationItem.titleView = titleLabel
     return navigationItem
@@ -81,15 +84,23 @@ private extension HeaderViewController {
     label.numberOfLines = 1
     label.textAlignment = .center
     return label
-  }
+  } 
 
   func makeCloseButton() -> UIButton {
     let button = UIButton(type: .system)
-    button.setTitle(localizedString("BUTTON_CLOSE"), for: UIControlState())
+    button.setTitle(localizedString("BUTTON_CLOSE"), for: UIControl.State())
     button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
     button.tintColor = .black
     return button
   }
+    
+    func makeDoneButton() -> UIButton {
+      let button = UIButton(type: .system)
+      button.setTitle("Xong", for: UIControl.State())
+      button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+      button.tintColor = .black
+      return button
+    }
 }
 
 // MARK: - UINavigationBarDelegate

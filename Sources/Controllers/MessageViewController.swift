@@ -49,7 +49,7 @@ public final class MessageViewController: UIViewController {
 
   /// Animates blur and border view.
   func animateLoading() {
-    animate(blurStyle: .light)
+//    animate(blurStyle: .light)
     animate(borderViewAngle: CGFloat(Double.pi/2))
   }
 
@@ -58,7 +58,7 @@ public final class MessageViewController: UIViewController {
 
    - Parameter style: The current blur style.
    */
-  private func animate(blurStyle: UIBlurEffectStyle) {
+    private func animate(blurStyle: UIBlurEffect.Style) {
     guard status.state == .processing else { return }
 
     UIView.animate(
