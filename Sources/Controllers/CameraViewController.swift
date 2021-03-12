@@ -74,9 +74,9 @@ public final class CameraViewController: UIViewController {
   private var frontCameraDevice: AVCaptureDevice? {
     if #available(iOS 10.0, *) {
         AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .front)
-    } else {
-        // Fallback on earlier versions
     }
+    return AVCaptureDevice.devices().filter({ $0.position == .front })
+        .first
   }
 
   private var backCameraDevice: AVCaptureDevice? {
